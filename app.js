@@ -8,10 +8,11 @@ var compression = require('compression');
 var helmet = require('helmet');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+require('dotenv').config({path: __dirname + '/.env'});
 var app = express();
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://tester:tkvv5289@cluster0.y3wv9.mongodb.net/local_library?retryWrites=true&w=majority';
+var mongoDB = process.env['MONGO_URI'];
+
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
